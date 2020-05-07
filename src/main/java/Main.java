@@ -2,6 +2,8 @@ import entity.Display;
 import entity.Product;
 import entity.VendingMachine;
 
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) throws Exception {
         Product product1 = new Product("Coca Cola 0.25l",1.5);
@@ -29,5 +31,11 @@ public class Main {
 
         Display display = new Display();
         display.showAllProducts(vendingMachine);
+
+        System.out.print("\nWybierz numer półki : ");
+        Scanner scanner = new Scanner(System.in);
+        int selectedShelf = scanner.nextInt();
+        display.showSelectedProduct(vendingMachine,selectedShelf);
+
     }
 }

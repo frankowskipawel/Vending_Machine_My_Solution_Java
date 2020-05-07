@@ -11,4 +11,15 @@ public class Display {
             }
         }
     }
+
+    public void showSelectedProduct(VendingMachine vendingMachine, int numberOfShelf){
+        Shelf selectedshelf = vendingMachine.getShelfsMap().get(numberOfShelf);
+        String productName = selectedshelf.getProduct().getName();
+        double productPrice = selectedshelf.getProduct().getPrice();
+        System.out.println(String.format("Wybrałeś %s CENA : %s PLN",productName,productPrice));
+
+
+    }
+
+
 }
