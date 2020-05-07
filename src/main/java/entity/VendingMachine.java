@@ -2,7 +2,6 @@ package entity;
 
 import lombok.Data;
 
-import java.security.InvalidParameterException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -26,13 +25,13 @@ public class VendingMachine {
     }
 
     public void addProduct(int shelfNumber, Product product, int quantity) throws Exception {
-        Validators validators = new Validators();
-        validators.productTypeValidation(this, shelfNumber, product);
-        validators.quantityValidation(this, shelfNumber, quantity);
-        validators.shelfNumberValidation(this, shelfNumber);
+        Shelf shelf = new Shelf();
+        product.productTypeValidation(this, shelfNumber, product);
+        shelf.quantityValidation(this, shelfNumber, quantity);
+        shelf.shelfNumberValidation(this, shelfNumber);
         Shelf shelfToWitchAdds = shelfsMap.get(shelfNumber);
         shelfToWitchAdds.setProduct(product);
-        shelfToWitchAdds.setQuantity(shelfToWitchAdds.quantity + quantity);
+        shelfToWitchAdds.setQuantity(shelfToWitchAdds.getQuantity() + quantity);
     }
 
     public boolean isShelfNotEmpty(int shelfNumber) {

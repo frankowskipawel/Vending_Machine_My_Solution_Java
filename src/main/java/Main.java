@@ -1,3 +1,4 @@
+import entity.Coin;
 import entity.Display;
 import entity.Product;
 import entity.VendingMachine;
@@ -32,10 +33,11 @@ public class Main {
         Display display = new Display();
         display.showAllProducts(vendingMachine);
 
-        display.showMessage("Wybierz numer półki : ");
+
         Scanner scanner = new Scanner(System.in);
         boolean isSelectedShelfCorrect = false;
         while (!isSelectedShelfCorrect) {
+            display.showMessage("Wybierz numer półki : ");
             int selectedShelf = scanner.nextInt();
             if (vendingMachine.isShelfNotEmpty(selectedShelf)) {
                 display.showSelectedProduct(vendingMachine, selectedShelf);
@@ -44,7 +46,16 @@ public class Main {
                 display.showMessage("Brak produktów na wybranej półce!");
             }
         }
-        display.showMessage("Wrzuć monete (wpisz nominał): ");
+        boolean isAddedCoin=true;
+        while (isAddedCoin) {
 
+            display.showMessage("Wrzuć monete (wpisz nominał): ");
+            String coinValue = scanner.next().toUpperCase();
+            if (coinValue.equals("OK")){break;}
+            if (coinValue.equals("ANULUJ")){break;}
+            Coin.coinValidation(Double.parseDouble(coinValue));
+
+
+        }
     }
 }

@@ -1,5 +1,6 @@
 package entity;
 
+
 public class Display {
 
     public void showAllProducts(VendingMachine vendingMachine) {
@@ -13,9 +14,8 @@ public class Display {
     }
 
     public void showSelectedProduct(VendingMachine vendingMachine, int numberOfShelf) {
-        Validators validators = new Validators();
-        validators.shelfNumberValidation(vendingMachine, numberOfShelf);
-
+        Shelf shelf = new Shelf();
+        shelf.shelfNumberValidation(vendingMachine, numberOfShelf);
         Shelf selectedshelf = vendingMachine.getShelfsMap().get(numberOfShelf);
         String productName = selectedshelf.getProduct().getName();
         double productPrice = selectedshelf.getProduct().getPrice();
@@ -23,7 +23,7 @@ public class Display {
     }
 
     public void showMessage(String message) {
-        System.out.println("\n" + message);
+        System.out.print("\n" + message);
     }
 
 
