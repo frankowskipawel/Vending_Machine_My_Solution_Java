@@ -27,12 +27,20 @@ public class VendingMachine {
 
     public void addProduct(int shelfNumber, Product product, int quantity) throws Exception {
         Validators validators = new Validators();
-        validators.productTypeValidation(this,shelfNumber,product);
-        validators.quantityValidation(this,shelfNumber, quantity);
-        validators.shelfNumberValidation(this,shelfNumber);
+        validators.productTypeValidation(this, shelfNumber, product);
+        validators.quantityValidation(this, shelfNumber, quantity);
+        validators.shelfNumberValidation(this, shelfNumber);
         Shelf shelfToWitchAdds = shelfsMap.get(shelfNumber);
         shelfToWitchAdds.setProduct(product);
         shelfToWitchAdds.setQuantity(shelfToWitchAdds.quantity + quantity);
     }
 
+    public boolean isShelfNotEmpty(int shelfNumber) {
+        Product shelfToWitchAdds = shelfsMap.get(shelfNumber).getProduct();
+        if (shelfToWitchAdds == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }
