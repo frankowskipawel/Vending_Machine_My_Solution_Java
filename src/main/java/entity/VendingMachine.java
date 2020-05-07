@@ -55,7 +55,7 @@ public class VendingMachine {
 
     public void shelfNumberValidation(int shelfNumber) throws IndexOutOfBoundsException {
         if (shelfNumber < 1 || shelfNumber > QUANTITY_OF_SHELFS) {
-            throw new IndexOutOfBoundsException("Brak półki z takim numerem. Dostępne numery (1-" + MAX_QUANTITY_ON_ONE_SHELF + ").");
+            throw new IndexOutOfBoundsException("Brak półki z takim numerem. Dostępne numery (1-" + getQUANTITY_OF_SHELFS() + ").");
         }
     }
 }
