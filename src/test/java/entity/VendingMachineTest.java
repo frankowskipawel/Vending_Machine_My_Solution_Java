@@ -156,4 +156,58 @@ class VendingMachineTest {
         //then
         assertNotNull(exception);
     }
+
+    @Test
+    void schouldNoThrowExceptionWhenProductIsNullTypeValidationTrue() {
+        //given
+        //when
+        try {
+            vendingMachine.productTypeValidation(1, productOne);
+        } catch (InvalidParameterException e) {
+            exception = e;
+        }
+        //then
+        assertNull(exception);
+    }
+
+    @Test
+    void schouldAddedProductTrue() throws Exception {
+        //given
+        //when
+        vendingMachine.addProduct(1,productOne,5);
+        //then
+        assertTrue(vendingMachine.getShelfsMap().get(1).getProduct().equals(productOne));
+    }
+
+    @Test
+    void schouldAddedProductQuantityTrue() throws Exception {
+        //given
+        //when
+        vendingMachine.addProduct(1,productOne,5);
+        //then
+        assertTrue(vendingMachine.getShelfsMap().get(1).getQuantity()==5);
+    }
+
+    @Test
+    void schouldAddedProductFalse() throws Exception {
+        //given
+        //when
+        //then
+        assertFalse(vendingMachine.getShelfsMap().get(1).getProduct()!=null);
+    }
+
+    @Test
+    void schouldThrowExceptionWhenWrongAddParametersProduct() throws Exception {
+        //given
+        //when
+        try {
+            vendingMachine.addProduct(vendingMachine.getQUANTITY_OF_SHELFS()+1, productOne, vendingMachine.getQUANTITY_OF_SHELFS()+1);
+        } catch (Exception e) {
+            exception = e;
+        }
+        //then
+        assertNotNull(exception);
+    }
+
+
 }
