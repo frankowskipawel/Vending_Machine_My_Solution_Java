@@ -32,7 +32,7 @@ public class Main {
         Display display = new Display();
         display.showAllProducts(vendingMachine);
 
-        System.out.print("\nWybierz numer półki : ");
+        display.showMessage("\nWybierz numer półki : ");
         Scanner scanner = new Scanner(System.in);
         int selectedShelf = scanner.nextInt();
         display.showSelectedProduct(vendingMachine,selectedShelf);

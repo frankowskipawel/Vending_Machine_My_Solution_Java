@@ -13,13 +13,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class VendingMachineTest {
 
     private VendingMachine vendingMachine;
-    private Product product1;
-    private Product product2;
     private Exception exception;
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
     private final PrintStream originalErr = System.err;
+    private Product product1;
+    private Product product2;
     private Product product3;
     private Product product4;
     private Product product5;
@@ -246,17 +246,7 @@ class VendingMachineTest {
         assertNotNull(exception);
     }
 
-    @Test
-    void schouldShowAllProductsOnDisplay() {
-        //given
-        Display display = new Display();
-        //when
-        display.showAllProducts(vendingMachine);
-        //then
-        assertTrue(outContent.toString().contains("Fanta 0.25l"));
-        assertTrue(outContent.toString().contains("Baton Twix 80g"));
-        assertTrue(outContent.toString().contains("Coca Cola 0.25l"));
-    }
+
 
 
     @After

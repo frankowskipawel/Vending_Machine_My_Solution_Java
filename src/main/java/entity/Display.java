@@ -17,8 +17,10 @@ public class Display {
         String productName = selectedshelf.getProduct().getName();
         double productPrice = selectedshelf.getProduct().getPrice();
         System.out.println(String.format("Wybrałeś %s CENA : %s PLN",productName,productPrice));
+    }
 
-
+    public void showMessage(String message){
+        System.out.println(message);
     }
 
 
