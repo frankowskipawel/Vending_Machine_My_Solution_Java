@@ -28,6 +28,7 @@ class VendingMachineTest {
     private Product product8;
     private Product product9;
     private Product product10;
+    private Validators validators;
 
     @BeforeEach
     void setUp() throws Exception {
@@ -55,6 +56,8 @@ class VendingMachineTest {
         vendingMachine.addProduct(21, product9,10);
         vendingMachine.addProduct(25, product10,10);
 
+        validators = new Validators();
+
         System.setOut(new PrintStream(outContent));
         System.setErr(new PrintStream(errContent));
     }
@@ -65,7 +68,7 @@ class VendingMachineTest {
         IndexOutOfBoundsException exception = null;
         //when
         try {
-            vendingMachine.shelfNumberValidation(1);
+            validators.shelfNumberValidation(vendingMachine,1);
         } catch (IndexOutOfBoundsException e) {
             exception = e;
         }
@@ -78,7 +81,7 @@ class VendingMachineTest {
         //given
         //when
         try {
-            vendingMachine.shelfNumberValidation(vendingMachine.getQUANTITY_OF_SHELFS());
+            validators.shelfNumberValidation(vendingMachine,vendingMachine.getQUANTITY_OF_SHELFS());
         } catch (IndexOutOfBoundsException e) {
             exception = e;
         }
@@ -91,8 +94,8 @@ class VendingMachineTest {
         //given
         //when
         try {
-            vendingMachine.shelfNumberValidation(0);
-            vendingMachine.shelfNumberValidation(-1);
+            validators.shelfNumberValidation(vendingMachine,0);
+            validators.shelfNumberValidation(vendingMachine,-1);
         } catch (IndexOutOfBoundsException e) {
             exception = e;
         }
@@ -105,7 +108,7 @@ class VendingMachineTest {
         //given
         //when
         try {
-            vendingMachine.shelfNumberValidation(vendingMachine.getQUANTITY_OF_SHELFS() + 1);
+            validators.shelfNumberValidation(vendingMachine,vendingMachine.getQUANTITY_OF_SHELFS() + 1);
         } catch (IndexOutOfBoundsException e) {
             exception = e;
         }
@@ -118,7 +121,7 @@ class VendingMachineTest {
         //given
         //when
         try {
-            vendingMachine.quantityValidation(2, 1);
+            validators.quantityValidation(vendingMachine,2, 1);
         } catch (IndexOutOfBoundsException e) {
             exception = e;
         }
@@ -131,7 +134,7 @@ class VendingMachineTest {
         //given
         //when
         try {
-            vendingMachine.quantityValidation(8, vendingMachine.getMAX_QUANTITY_ON_ONE_SHELF());
+            validators.quantityValidation(vendingMachine,8, vendingMachine.getMAX_QUANTITY_ON_ONE_SHELF());
         } catch (IndexOutOfBoundsException e) {
             exception = e;
         }
@@ -144,8 +147,8 @@ class VendingMachineTest {
         //given
         //when
         try {
-            vendingMachine.quantityValidation(1, 0);
-            vendingMachine.quantityValidation(1, -1);
+            validators.quantityValidation(vendingMachine,1, 0);
+            validators.quantityValidation(vendingMachine,1, -1);
         } catch (IndexOutOfBoundsException e) {
             exception = e;
         }
@@ -158,7 +161,7 @@ class VendingMachineTest {
         //given
         //when
         try {
-            vendingMachine.quantityValidation(1, vendingMachine.getMAX_QUANTITY_ON_ONE_SHELF() + 1);
+            validators.quantityValidation(vendingMachine,1, vendingMachine.getMAX_QUANTITY_ON_ONE_SHELF() + 1);
         } catch (IndexOutOfBoundsException e) {
             exception = e;
         }
@@ -172,7 +175,7 @@ class VendingMachineTest {
         vendingMachine.getShelfsMap().get(1).setProduct(product1);
         //when
         try {
-            vendingMachine.productTypeValidation(1, product1);
+            validators.productTypeValidation(vendingMachine,1, product1);
         } catch (InvalidParameterException e) {
             exception = e;
         }
@@ -186,7 +189,7 @@ class VendingMachineTest {
         vendingMachine.getShelfsMap().get(1).setProduct(product2);
         //when
         try {
-            vendingMachine.productTypeValidation(1, product1);
+            validators.productTypeValidation(vendingMachine,1, product1);
         } catch (InvalidParameterException e) {
             exception = e;
         }
@@ -199,7 +202,7 @@ class VendingMachineTest {
         //given
         //when
         try {
-            vendingMachine.productTypeValidation(1, product1);
+            validators.productTypeValidation(vendingMachine,1, product1);
         } catch (InvalidParameterException e) {
             exception = e;
         }

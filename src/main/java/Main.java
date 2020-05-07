@@ -32,10 +32,10 @@ public class Main {
         Display display = new Display();
         display.showAllProducts(vendingMachine);
 
-        display.showMessage("\nWybierz numer półki : ");
+        display.showMessage("Wybierz numer półki : ");
         Scanner scanner = new Scanner(System.in);
         int selectedShelf = scanner.nextInt();
         display.showSelectedProduct(vendingMachine,selectedShelf);
-
+        display.showMessage("Wrzuć monete (wpisz nominał): ");
     }
 }
