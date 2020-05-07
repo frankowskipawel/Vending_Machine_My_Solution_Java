@@ -17,10 +17,25 @@ public enum Coin {
     }
 
     public static void coinValidation(double coinValue) throws Exception {
-        boolean isContains=false;
+        boolean isContains = false;
         for (Coin coin : Coin.values()) {
-            if (coin.getValue()==coinValue){isContains=true;}
+            if (coin.getValue() == coinValue) {
+                isContains = true;
+            }
         }
-        if (!isContains){throw new Exception("Niepoprawna moneta!");}
+        if (!isContains) {
+            throw new Exception("Niepoprawna moneta!");
+        }
     }
+
+    public static Coin getCoinByValue(double coinValue) {
+        for (Coin coin : Coin.values()) {
+            if (coin.getValue() == coinValue) {
+                return coin;
+            }
+        }
+        return null;
+    }
+
+
 }

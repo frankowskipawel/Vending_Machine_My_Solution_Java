@@ -48,4 +48,17 @@ class CoinTest {
         assertNotNull(exception);
     }
 
+    @Test
+    void schouldGetCoinByValue(){
+        //given
+        //when
+        Coin coin1 = Coin.getCoinByValue(1.0);
+        Coin coin2 = Coin.getCoinByValue(5);
+        Coin coin3 = Coin.getCoinByValue(0.5);
+        //then
+        assertTrue(coin1.getValue()==1);
+        assertTrue(coin2.getValue()==5);
+        assertTrue(coin3.getValue()==0.5);
+    }
+
 }

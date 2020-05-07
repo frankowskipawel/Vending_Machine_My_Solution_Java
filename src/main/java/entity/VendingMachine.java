@@ -10,8 +10,8 @@ public class VendingMachine {
 
     private final int QUANTITY_OF_SHELFS = 25;
     private final int MAX_QUANTITY_ON_ONE_SHELF = 10;
-
     private Map<Integer, Shelf> shelfsMap;
+    private CashBox cashBox = new CashBox();
 
     public VendingMachine() {
         initializeShelfs();
@@ -42,4 +42,27 @@ public class VendingMachine {
             return true;
         }
     }
+
+    public void putCoinToTempCoinBox(Coin coin) {
+        cashBox.getTempCoinBox().add(coin);
+    }
+
+    public void putCoinsFromTempCoinBoxToCashInStock() {
+        cashBox.getCashInStock().addAll(cashBox.getTempCoinBox());
+    }
+
+    public void returnCoinsFromTempCoinBox() {
+        System.out.println("Zwracem monety!");
+        System.out.println(cashBox.getTempCoinBox());
+        cashBox.getTempCoinBox().clear();
+    }
+
+    public void dispenseProduct(int shelfNumber){
+        Shelf shelf = shelfsMap.get(shelfNumber);
+        int currentQuantity = shelf.getQuantity();
+        if ((currentQuantity-1)>0){
+        shelf.setQuantity(currentQuantity-1);}
+
+    }
+
 }

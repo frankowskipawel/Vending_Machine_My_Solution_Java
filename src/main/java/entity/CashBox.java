@@ -1,8 +1,14 @@
 package entity;
 
+import lombok.Data;
+
+import java.util.ArrayList;
 import java.util.List;
 
+@Data
 public class CashBox {
-    List<Coin> cashInStock;
-    List<Coin> tempCoinBox;
+    private List<Coin> cashInStock = new ArrayList<>();
+    private List<Coin> tempCoinBox= new ArrayList<>();
+
+
 }
