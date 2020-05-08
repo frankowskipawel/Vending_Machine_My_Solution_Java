@@ -194,6 +194,28 @@ class VendingMachineTest {
         assertFalse(sum < 3.5 || sum < 3.5);
     }
 
+    @Test
+    void schouldDispenseProductTrue() {
+        //given
+
+        //when
+        vendingMachine.dispenseProduct(1);
+        vendingMachine.dispenseProduct(1);
+        int newQuantity = vendingMachine.getShelfsMap().get(1).getQuantity();
+        //then
+        assertEquals(8,newQuantity);
+    }
+
+    @Test
+    void schouldDispenseProductFalse() {
+        //given
+        //when
+        vendingMachine.dispenseProduct(1);
+        int newQuantity = vendingMachine.getShelfsMap().get(1).getQuantity();
+        //then
+        assertFalse(10==newQuantity);
+    }
+
     @After
     public void restoreStreams() {
         System.setOut(originalOut);

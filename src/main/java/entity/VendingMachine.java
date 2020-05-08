@@ -1,6 +1,7 @@
 package entity;
 
 import lombok.Data;
+import strategy.Request;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -12,6 +13,7 @@ public class VendingMachine {
     private final int MAX_QUANTITY_ON_ONE_SHELF = 10;
     private Map<Integer, Shelf> shelfsMap;
     private CashBox cashBox = new CashBox();
+    private Request requestStrategy;
 
     public VendingMachine() {
         initializeShelfs();
@@ -57,26 +59,31 @@ public class VendingMachine {
         cashBox.getTempCoinBox().clear();
     }
 
-    public double sumCoinsFromTempCoinBox(){
-        double sum=0;
+    public double sumCoinsFromTempCoinBox() {
+        double sum = 0;
         for (Coin coin : cashBox.getTempCoinBox()) {
-            sum+=coin.getValue();
+            sum += coin.getValue();
         }
         return sum;
     }
 
-    public double sumCoinsFromCashInStock(){
-        double sum=0;
+    public double sumCoinsFromCashInStock() {
+        double sum = 0;
         for (Coin coin : cashBox.getCashInStock()) {
-            sum+=coin.getValue();
+            sum += coin.getValue();
         }
         return sum;
     }
 
-    public void dispenseProduct(int shelfNumber){
+    public void requestProduct(int shelfNumber) {
+        if (sumCoinsFromTempCoinBox() == shelfsMap.get(shelfNumber).getProduct().getPrice()) {
+
+        }
+    }
+
+    public void dispenseProduct(int shelfNumber) {
         Shelf shelf = shelfsMap.get(shelfNumber);
         int currentQuantity = shelf.getQuantity();
-        if ((currentQuantity-1)>0){
-            shelf.setQuantity(currentQuantity-1);}
+        shelf.setQuantity(currentQuantity - 1);
     }
 }
