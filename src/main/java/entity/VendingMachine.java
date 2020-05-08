@@ -57,12 +57,26 @@ public class VendingMachine {
         cashBox.getTempCoinBox().clear();
     }
 
+    public double sumCoinsFromTempCoinBox(){
+        double sum=0;
+        for (Coin coin : cashBox.getTempCoinBox()) {
+            sum+=coin.getValue();
+        }
+        return sum;
+    }
+
+    public double sumCoinsFromCashInStock(){
+        double sum=0;
+        for (Coin coin : cashBox.getCashInStock()) {
+            sum+=coin.getValue();
+        }
+        return sum;
+    }
+
     public void dispenseProduct(int shelfNumber){
         Shelf shelf = shelfsMap.get(shelfNumber);
         int currentQuantity = shelf.getQuantity();
         if ((currentQuantity-1)>0){
-        shelf.setQuantity(currentQuantity-1);}
-
+            shelf.setQuantity(currentQuantity-1);}
     }
-
 }

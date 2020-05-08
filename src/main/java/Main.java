@@ -35,7 +35,7 @@ public class Main {
         boolean isAddedCoin = true;
         while (isAddedCoin) {
             try {
-                display.showMessage("Wrzuć monete (wpisz nominał): ");
+                display.showMessage(String.format("Wrzuć monete (wpisz nominał) %.2fPLN: ", vendingMachine.sumCoinsFromTempCoinBox()));
                 String coinValue = scanner.next().toUpperCase();
                 if (coinValue.equals("OK")) {
                     vendingMachine.dispenseProduct(selectedShelf);
@@ -46,9 +46,9 @@ public class Main {
                     vendingMachine.returnCoinsFromTempCoinBox();
                     break;
                 }
-                double pasreToDoubleCoin = Double.parseDouble(coinValue);
-                Coin.coinValidation(pasreToDoubleCoin);
-                vendingMachine.putCoinToTempCoinBox(Coin.getCoinByValue(pasreToDoubleCoin));
+                double coinInDouble = Double.parseDouble(coinValue);
+                Coin.coinValidation(coinInDouble);
+                vendingMachine.putCoinToTempCoinBox(Coin.getCoinByValue(coinInDouble));
             } catch (Exception e) {
                 display.showMessage("Niepoprawny nominał! "+e.getMessage());
             }
