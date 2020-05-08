@@ -38,23 +38,23 @@ public class Main {
                 display.showMessage(String.format("Wrzuć monete (wpisz nominał) %.2fPLN: ", vendingMachine.sumCoinsFromTempCoinBox()));
                 String coinValue = scanner.next().toUpperCase();
                 if (coinValue.equals("OK")) {
-                    vendingMachine.dispenseProduct(selectedShelf);
-                    display.showMessage("Wydano towar.");
-                    break;
-                }
-                if (coinValue.equals("ANULUJ")) {
+                    isAddedCoin = !vendingMachine.requestProduct(selectedShelf);
+                    if (isAddedCoin == false) {
+                        break;
+                    }
+                } else if (coinValue.equals("ANULUJ")) {
                     vendingMachine.returnCoinsFromTempCoinBox();
                     break;
+                } else {
+                    double coinInDouble = Double.parseDouble(coinValue);
+                    Coin.coinValidation(coinInDouble);
+                    vendingMachine.putCoinToTempCoinBox(Coin.getCoinByValue(coinInDouble));
                 }
-                double coinInDouble = Double.parseDouble(coinValue);
-                Coin.coinValidation(coinInDouble);
-                vendingMachine.putCoinToTempCoinBox(Coin.getCoinByValue(coinInDouble));
             } catch (Exception e) {
-                display.showMessage("Niepoprawny nominał! "+e.getMessage());
+                display.showMessage("Niepoprawny nominał! " + e.getMessage());
             }
         }
         vendingMachine.putCoinsFromTempCoinBoxToCashInStock();
-        System.out.println(vendingMachine.getCashBox().getCashInStock());
     }
 
     private static void initialize() {

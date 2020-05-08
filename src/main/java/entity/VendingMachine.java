@@ -1,7 +1,10 @@
 package entity;
 
 import lombok.Data;
+import strategy.EqualAmount;
+import strategy.LargerAmount;
 import strategy.Request;
+import strategy.SmallerAmount;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -75,10 +78,25 @@ public class VendingMachine {
         return sum;
     }
 
-    public void requestProduct(int shelfNumber) {
-        if (sumCoinsFromTempCoinBox() == shelfsMap.get(shelfNumber).getProduct().getPrice()) {
-
+    public boolean requestProduct(int shelfNumber) {
+        double price = shelfsMap.get(shelfNumber).getProduct().getPrice();
+        if (sumCoinsFromTempCoinBox() == price) {
+            requestStrategy = new EqualAmount();
+            requestStrategy.productReleaseRequest(this, shelfNumber);
+            return true;
         }
+        if (sumCoinsFromTempCoinBox() < price){
+            requestStrategy = new SmallerAmount();
+            requestStrategy.productReleaseRequest(this, shelfNumber);
+            return false;
+        }
+        if (sumCoinsFromTempCoinBox() > price){
+            requestStrategy = new LargerAmount();
+            requestStrategy.productReleaseRequest(this, shelfNumber);
+            return false;
+        }
+        requestStrategy.productReleaseRequest(this, shelfNumber);
+        return false;
     }
 
     public void dispenseProduct(int shelfNumber) {
