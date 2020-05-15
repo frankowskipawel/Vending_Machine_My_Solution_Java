@@ -14,16 +14,17 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         Shelf shelf = new Shelf();
 
-        int selectedShelf = 0;
+        int numberSelectedShelf = 0;
         boolean isSelectedShelfCorrect = false;
         while (!isSelectedShelfCorrect) {
             try {
                 display.showMessage("Wybierz numer półki : ");
-                selectedShelf = scanner.nextInt();
-                shelf.shelfNumberValidation(vendingMachine, selectedShelf);
-                if (vendingMachine.isShelfNotEmpty(selectedShelf)) {
-                    display.showSelectedProduct(vendingMachine, selectedShelf);
+                numberSelectedShelf = scanner.nextInt();
+                shelf.shelfNumberValidation(vendingMachine, numberSelectedShelf);
+                if (vendingMachine.isShelfNotEmpty(numberSelectedShelf)) {
+                    display.showSelectedProduct(vendingMachine, numberSelectedShelf);
                     isSelectedShelfCorrect = true;
+                    shelf = vendingMachine.getShelfsMap().get(numberSelectedShelf);
                 } else {
                     display.showMessage("Brak produktów na wybranej półce!");
                 }
@@ -33,12 +34,20 @@ public class Main {
         }
 
         boolean isAddedCoin = true;
+        double missingAmount=0;
         while (isAddedCoin) {
             try {
-                display.showMessage(String.format("Wrzuć monete (wpisz nominał) %.2fPLN: ", vendingMachine.sumCoinsFromTempCoinBox()));
+                missingAmount=vendingMachine.sumCoinsFromTempCoinBox()-shelf.getProduct().getPrice();
+                String prefix = "";
+                if (missingAmount<0){prefix="pozostało";}
+                if (missingAmount>0){prefix="OK (za dużo)";}
+                if (missingAmount==0){prefix="OK (pozostało)";}
+
+                display.showMessage(String.format("Wrzuć monete (wpisz nominał) %s %.2fPLN: ", prefix, missingAmount));
                 String coinValue = scanner.next().toUpperCase();
+
                 if (coinValue.equals("OK")) {
-                    isAddedCoin = !vendingMachine.requestProduct(selectedShelf);
+                    isAddedCoin = !vendingMachine.requestProduct(numberSelectedShelf);
                     if (isAddedCoin == false) {
                         break;
                     }
