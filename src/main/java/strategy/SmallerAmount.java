@@ -5,8 +5,9 @@ import entity.VendingMachine;
 
 public class SmallerAmount implements Request{
     @Override
-    public void productReleaseRequest(VendingMachine vendingMachine, int shelfNumber) {
+    public boolean productReleaseRequest(VendingMachine vendingMachine, int shelfNumber) {
         Display display = new Display();
         display.showMessage("Nie wystarczające środki. Uzupełnij lub naciśnij ANULUJ w celu zwrotu pieniędzy");
+        return false;
     }
 }

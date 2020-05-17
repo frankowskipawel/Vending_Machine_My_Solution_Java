@@ -8,7 +8,7 @@ public class Display {
             Shelf shelf = (Shelf) shelfs.getValue();
             Product product = shelf.getProduct();
             if (product != null) {
-                System.out.println(shelfs.getKey() + " : " + product.getName());
+                System.out.println(shelfs.getKey() + " : " + product.getName()+" - "+product.getPrice()+"PLN");
             }
         }
     }
@@ -23,7 +23,7 @@ public class Display {
     }
 
     public void showMessage(String message) {
-        System.out.print("\n" + message);
+        System.out.print("\n" + message+"\n");
     }
 
 

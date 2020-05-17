@@ -12,6 +12,9 @@ import java.util.Map;
 @Data
 public class VendingMachine {
 
+    private static VendingMachine vendingMachine;
+
+
     private final int QUANTITY_OF_SHELFS = 25;
     private final int MAX_QUANTITY_ON_ONE_SHELF = 10;
     private Map<Integer, Shelf> shelfsMap;
@@ -20,6 +23,14 @@ public class VendingMachine {
 
     public VendingMachine() {
         initializeShelfs();
+    }
+
+    public static VendingMachine getInstance() {
+        if (vendingMachine == null) {
+            vendingMachine = new VendingMachine();
+            return vendingMachine;
+        }
+        return vendingMachine;
     }
 
     private void initializeShelfs() {
@@ -54,6 +65,7 @@ public class VendingMachine {
 
     public void putCoinsFromTempCoinBoxToCashInStock() {
         cashBox.getCashInStock().addAll(cashBox.getTempCoinBox());
+        cashBox.getTempCoinBox().clear();
     }
 
     public void returnCoinsFromTempCoinBox() {
@@ -85,15 +97,15 @@ public class VendingMachine {
             requestStrategy.productReleaseRequest(this, shelfNumber);
             return true;
         }
-        if (sumCoinsFromTempCoinBox() < price){
+        if (sumCoinsFromTempCoinBox() < price) {
             requestStrategy = new SmallerAmount();
             requestStrategy.productReleaseRequest(this, shelfNumber);
             return false;
         }
-        if (sumCoinsFromTempCoinBox() > price){
+        if (sumCoinsFromTempCoinBox() > price) {
             requestStrategy = new LargerAmount();
             requestStrategy.productReleaseRequest(this, shelfNumber);
-            return false;
+            return true;
         }
         requestStrategy.productReleaseRequest(this, shelfNumber);
         return false;
