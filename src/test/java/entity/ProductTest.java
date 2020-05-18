@@ -28,7 +28,7 @@ class ProductTest {
 //        vendingMachine.getShelfsMap().get(1).setProduct(productOne);
         //when
         try {
-            productOne.productTypeValidation(vendingMachine, 1, productOne);
+            productOne.productTypeValidation(1, productOne);
         } catch (InvalidParameterException e) {
             exception = e;
         }
@@ -42,7 +42,7 @@ class ProductTest {
 //        vendingMachine.getShelfsMap().get(1).setProduct(productTwo);
         //when
         try {
-            productOne.productTypeValidation(vendingMachine, 1, productOne);
+            productOne.productTypeValidation(1, productOne);
         } catch (InvalidParameterException e) {
             exception = e;
         }
@@ -55,7 +55,7 @@ class ProductTest {
         //given
         //when
         try {
-            productOne.productTypeValidation(vendingMachine, 1, productOne);
+            productOne.productTypeValidation( 1, productOne);
         } catch (InvalidParameterException e) {
             exception = e;
         }

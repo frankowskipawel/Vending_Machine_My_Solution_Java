@@ -23,9 +23,9 @@ public class Main {
                 try {
                     display.showMessage("Wybierz numer półki : ");
                     numberSelectedShelf = scanner.nextInt();
-                    shelf.shelfNumberValidation(vendingMachine, numberSelectedShelf);
+                    shelf.shelfNumberValidation(numberSelectedShelf);
                     if (vendingMachine.isShelfNotEmpty(numberSelectedShelf)) {
-                        display.showSelectedProduct(vendingMachine, numberSelectedShelf);
+                        display.showSelectedProduct( numberSelectedShelf);
                         isSelectedShelfCorrect = true;
                         shelf = vendingMachine.getShelfsMap().get(numberSelectedShelf);
                     } else {
@@ -52,6 +52,7 @@ public class Main {
                         prefix = "OK pozostało";
                     }
 
+                    display.showMessage("Dostępne przyciski OK i ANULUJ");
                     display.showMessage(String.format("Wrzuć monete (wpisz nominał) %s %.2fPLN: ", prefix, missingAmount));
                     String coinValue = scanner.next().toUpperCase();
 
@@ -73,7 +74,6 @@ public class Main {
                 }
             }
         }
-//        vendingMachine.putCoinsFromTempCoinBoxToCashInStock();
     }
 
     private static void initialize() {

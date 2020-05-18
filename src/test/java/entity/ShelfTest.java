@@ -23,7 +23,7 @@ class ShelfTest {
         IndexOutOfBoundsException exception = null;
         //when
         try {
-            shelf.shelfNumberValidation(vendingMachine, 1);
+            shelf.shelfNumberValidation(1);
         } catch (IndexOutOfBoundsException e) {
             exception = e;
         }
@@ -36,7 +36,7 @@ class ShelfTest {
         //given
         //when
         try {
-            shelf.shelfNumberValidation(vendingMachine, vendingMachine.getQUANTITY_OF_SHELFS());
+            shelf.shelfNumberValidation( vendingMachine.getQUANTITY_OF_SHELFS());
         } catch (IndexOutOfBoundsException e) {
             exception = e;
         }
@@ -49,8 +49,8 @@ class ShelfTest {
         //given
         //when
         try {
-            shelf.shelfNumberValidation(vendingMachine, 0);
-            shelf.shelfNumberValidation(vendingMachine, -1);
+            shelf.shelfNumberValidation(0);
+            shelf.shelfNumberValidation(-1);
         } catch (IndexOutOfBoundsException e) {
             exception = e;
         }
@@ -63,7 +63,7 @@ class ShelfTest {
         //given
         //when
         try {
-            shelf.shelfNumberValidation(vendingMachine, vendingMachine.getQUANTITY_OF_SHELFS() + 1);
+            shelf.shelfNumberValidation(vendingMachine.getQUANTITY_OF_SHELFS() + 1);
         } catch (IndexOutOfBoundsException e) {
             exception = e;
         }
@@ -76,7 +76,7 @@ class ShelfTest {
         //given
         //when
         try {
-            shelf.quantityValidation(vendingMachine, 2, 1);
+            shelf.quantityValidation( 2, 1);
         } catch (IndexOutOfBoundsException e) {
             exception = e;
         }
@@ -89,7 +89,7 @@ class ShelfTest {
         //given
         //when
         try {
-            shelf.quantityValidation(vendingMachine, 8, vendingMachine.getMAX_QUANTITY_ON_ONE_SHELF());
+            shelf.quantityValidation( 8, vendingMachine.getMAX_QUANTITY_ON_ONE_SHELF());
         } catch (IndexOutOfBoundsException e) {
             exception = e;
         }
@@ -102,8 +102,8 @@ class ShelfTest {
         //given
         //when
         try {
-            shelf.quantityValidation(vendingMachine, 1, 0);
-            shelf.quantityValidation(vendingMachine, 1, -1);
+            shelf.quantityValidation( 1, 0);
+            shelf.quantityValidation( 1, -1);
         } catch (IndexOutOfBoundsException e) {
             exception = e;
         }
@@ -116,7 +116,7 @@ class ShelfTest {
         //given
         //when
         try {
-            shelf.quantityValidation(vendingMachine, 1, vendingMachine.getMAX_QUANTITY_ON_ONE_SHELF() + 1);
+            shelf.quantityValidation( 1, vendingMachine.getMAX_QUANTITY_ON_ONE_SHELF() + 1);
         } catch (IndexOutOfBoundsException e) {
             exception = e;
         }

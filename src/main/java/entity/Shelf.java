@@ -6,20 +6,21 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class Shelf {
+    private static VendingMachine vendingMachine = VendingMachine.getInstance();
     private Product product;
     private int quantity;
 
     public Shelf() {
     }
 
-    public void shelfNumberValidation(VendingMachine vendingMachine, int shelfNumber) throws IndexOutOfBoundsException {
+    public void shelfNumberValidation(int shelfNumber) throws IndexOutOfBoundsException {
         if (shelfNumber < 1 || shelfNumber > vendingMachine.getQUANTITY_OF_SHELFS()) {
             throw new IndexOutOfBoundsException("Brak półki z takim numerem. Dostępne numery (1-" +
                     vendingMachine.getQUANTITY_OF_SHELFS() + ").");
         }
     }
 
-    public void quantityValidation(VendingMachine vendingMachine, int shelfNumber, int quantity) throws IndexOutOfBoundsException {
+    public void quantityValidation(int shelfNumber, int quantity) throws IndexOutOfBoundsException {
         Shelf shelfToWitchAdds = vendingMachine.getShelfsMap().get(shelfNumber);
         if (quantity < 1) {
             throw new IndexOutOfBoundsException("Nieprawidłowa ilość.");

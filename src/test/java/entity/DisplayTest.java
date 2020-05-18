@@ -35,7 +35,6 @@ class DisplayTest {
     @Test
     void schouldShowAllProductsOnDisplay() {
         //given
-        Display display = new Display();
         //when
         display.showAllProducts(vendingMachine);
         //then
@@ -46,12 +45,9 @@ class DisplayTest {
     @Test
     void schouldShowMessageTrue(){
         //given
-        Display display = new Display();
         //when
         display.showMessage("Wybierz produkt");
         //then
         assertTrue(outContent.toString().contains("Wybierz produkt"));
     }
-
-
 }

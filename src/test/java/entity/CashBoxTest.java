@@ -20,8 +20,6 @@ class CashBoxTest {
         cashBox.getCashInStock().add(Coin.PLN_1);
         cashBox.getCashInStock().add(Coin.PLN_2);
         cashBox.getCashInStock().add(Coin.PLN_5);
-
-
     }
 
     @Test
@@ -140,5 +138,19 @@ class CashBoxTest {
         returnedCoins = cashBox.spendTheRest(2.9);
         //then
         assertTrue(returnedCoins==null);
+    }
+
+    @Test
+    public void schouldGetAmountInTempCoinBoxTrue() {
+        //given
+        cashBox.getTempCoinBox().add(Coin.PLN_05);
+        cashBox.getTempCoinBox().add(Coin.PLN_02);
+        cashBox.getTempCoinBox().add(Coin.PLN_01);
+        cashBox.getTempCoinBox().add(Coin.PLN_5);
+        cashBox.getTempCoinBox().add(Coin.PLN_5);
+        //when
+        Double cashInTempCoinBox = cashBox.getAmountInTempCoinBox();
+        //then
+        assertEquals(cashInTempCoinBox,10.8);
     }
 }

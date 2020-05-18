@@ -14,9 +14,9 @@ public class VendingMachine {
 
     private static VendingMachine vendingMachine;
 
-
     private final int QUANTITY_OF_SHELFS = 25;
     private final int MAX_QUANTITY_ON_ONE_SHELF = 10;
+
     private Map<Integer, Shelf> shelfsMap;
     private CashBox cashBox = new CashBox();
     private Request requestStrategy;
@@ -42,9 +42,9 @@ public class VendingMachine {
 
     public void addProduct(int shelfNumber, Product product, int quantity) throws Exception {
         Shelf shelf = new Shelf();
-        product.productTypeValidation(this, shelfNumber, product);
-        shelf.quantityValidation(this, shelfNumber, quantity);
-        shelf.shelfNumberValidation(this, shelfNumber);
+        product.productTypeValidation(shelfNumber, product);
+        shelf.quantityValidation(shelfNumber, quantity);
+        shelf.shelfNumberValidation(shelfNumber);
         Shelf shelfToWitchAdds = shelfsMap.get(shelfNumber);
         shelfToWitchAdds.setProduct(product);
         shelfToWitchAdds.setQuantity(shelfToWitchAdds.getQuantity() + quantity);
@@ -94,26 +94,30 @@ public class VendingMachine {
         double price = shelfsMap.get(shelfNumber).getProduct().getPrice();
         if (sumCoinsFromTempCoinBox() == price) {
             requestStrategy = new EqualAmount();
-            requestStrategy.productReleaseRequest(this, shelfNumber);
+            requestStrategy.productReleaseRequest( shelfNumber);
             return true;
         }
         if (sumCoinsFromTempCoinBox() < price) {
             requestStrategy = new SmallerAmount();
-            requestStrategy.productReleaseRequest(this, shelfNumber);
+            requestStrategy.productReleaseRequest(shelfNumber);
             return false;
         }
         if (sumCoinsFromTempCoinBox() > price) {
             requestStrategy = new LargerAmount();
-            requestStrategy.productReleaseRequest(this, shelfNumber);
+            requestStrategy.productReleaseRequest(shelfNumber);
             return true;
         }
-        requestStrategy.productReleaseRequest(this, shelfNumber);
+        requestStrategy.productReleaseRequest(shelfNumber);
         return false;
     }
 
     public void dispenseProduct(int shelfNumber) {
         Shelf shelf = shelfsMap.get(shelfNumber);
-        int currentQuantity = shelf.getQuantity();
-        shelf.setQuantity(currentQuantity - 1);
+        int shelfQuantity = shelf.getQuantity();
+        if (shelfQuantity <= 1) {
+            shelf.setProduct(null);
+        } else {
+            shelf.setQuantity(shelf.getQuantity() - 1);
+        }
     }
 }
